@@ -1,5 +1,7 @@
 # File Search Tool
 
+![file_search_tool](assets/banner.png)
+
 A Python tool for searching a specific word across multiple files in a folder and its subfolders. This utility scans files, displays matches, and provides a summary of the results, making it a great tool for text analysis or code auditing tasks.
 
 ---
@@ -7,6 +9,8 @@ A Python tool for searching a specific word across multiple files in a folder an
 ## 📦 Project Structure
 
 ```plaintext
+├── assets/               # Folder for assets like images and media
+│   ├── banner.png        # Banner image for the README
 ├── file_search_tool.py   # Main script for running the tool
 ├── README.md             # Project documentation
 ```
