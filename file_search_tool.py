@@ -38,13 +38,16 @@ def search_word_in_files(folder_path, search_word, show_all_matches=False, file_
             except (FileNotFoundError, PermissionError) as e:
                 print(f"Error accessing {file_path}: {e}")
 
+    return matches, total_files_scanned, total_matches_found
+
+
+def print_results(results):
     # Summary of the search results
     print("\n" + "-" * 60)
     print(f"Search completed.")
-    print(f"Total files scanned: {total_files_scanned}")
-    print(f"Total matches found: {total_matches_found}")
+    print(f"Total files scanned: {results[1]}")
+    print(f"Total matches found: {results[2]}")
     print("-" * 60)
-    return matches, total_files_scanned, total_matches_found
 
 
 def main():
@@ -57,7 +60,9 @@ def main():
     show_all_matches = input("Show all matches? (yes/no): ").strip().lower() == 'yes'
     file_extension = input("Filter by file extension (press Enter to skip): ").strip() or None
 
-    search_word_in_files(folder_path, search_word, show_all_matches, file_extension)
+    results = search_word_in_files(folder_path, search_word, show_all_matches, file_extension)
+    print_results(results)
+
 
 if __name__ == "__main__":
     main()
