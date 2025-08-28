@@ -35,9 +35,10 @@ class SearchForm(ttk.Frame):
         self.rowconfigure(1, weight=1)
         self.rowconfigure(2, weight=1)
         self.rowconfigure(3, weight=1)
+        self.rowconfigure(4, weight=20)
 
         self.folder_path_label = ttk.Label(self, text='Folder path')
-        self.folder_path_label.grid(row=0, column=0, sticky='w')
+        self.folder_path_label.grid(row=0, column=0, sticky='wn')
 
         self.folder_path = ttk.Entry(self)
         self.folder_path.grid(row=0, column=1, columnspan=2, sticky='wne')
@@ -48,11 +49,14 @@ class SearchForm(ttk.Frame):
         self.search_word = ttk.Entry(self)
         self.search_word.grid(row=1, column=1, columnspan=2, sticky='wne')
 
+        self.all_matches = ttk.Checkbutton(self, text='Show all matches', variable=False)
+        self.all_matches.grid(row=2, column=0, sticky='wn')
+
         self.entry_btn = ttk.Button(self, text='Search', command=self.search)
-        self.entry_btn.grid(row=2, column=0, sticky='wn')
+        self.entry_btn.grid(row=3, column=0, sticky='wn')
 
         self.search_result = ScrolledText(self)
-        self.search_result.grid(row=3, column=0, columnspan=3, sticky="nsew")
+        self.search_result.grid(row=4, column=0, columnspan=3, sticky="nsew")
         self.search_result.insert(1.0, 'test\ntest\ntest')
 
     def add_to_text(self, _event=None):
