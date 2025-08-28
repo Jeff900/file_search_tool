@@ -13,6 +13,7 @@ def search_word_in_files(folder_path, search_word, show_all_matches=False, file_
     regex = re.compile(re.escape(search_word), re.IGNORECASE)
     total_files_scanned = 0
     total_matches_found = 0
+    matches = []
 
     for root, _, files in os.walk(folder_path):
         for file_name in files:
@@ -29,6 +30,7 @@ def search_word_in_files(folder_path, search_word, show_all_matches=False, file_
                     for line_number, line in enumerate(file, start=1):
                         if regex.search(line):
                             print(f"Match found in: {file_path} (Line {line_number})")
+                            matches.append(f"Match found in: {file_path} (Line {line_number})")
                             total_matches_found += 1
                             match_found = True
                             if not show_all_matches:
@@ -42,6 +44,8 @@ def search_word_in_files(folder_path, search_word, show_all_matches=False, file_
     print(f"Total files scanned: {total_files_scanned}")
     print(f"Total matches found: {total_matches_found}")
     print("-" * 60)
+    return matches, total_files_scanned, total_matches_found
+
 
 def main():
     """
@@ -57,4 +61,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
