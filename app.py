@@ -35,7 +35,6 @@ class SearchForm(ttk.Frame):
 
         self.folder_path_label = ttk.Label(self, text='Folder path')
         self.folder_path_label.grid(row=0, column=0, sticky='nw')
-        # self.folder_path_label.grid(row=0, column=0)
 
         self.folder_path = ttk.Entry(self, width=50)
         self.folder_path.grid(row=0, column=1, columnspan=2, sticky='wne')
@@ -46,7 +45,7 @@ class SearchForm(ttk.Frame):
         self.search_word = ttk.Entry(self, width=50)
         self.search_word.grid(row=1, column=1, columnspan=2, sticky='wne')
 
-        self.all_matches = ttk.Checkbutton(self, text='Show all matches', variable=False)
+        self.all_matches = ttk.Checkbutton(self, text='Show all matches')
         self.all_matches.grid(row=2, column=0, sticky='wn')
 
         self.entry_btn = ttk.Button(self, text='Search', command=self.search)
@@ -67,7 +66,20 @@ class SearchForm(ttk.Frame):
         self.search_result.delete(1.0, tk.END)
 
     def search(self):
-        results = fst.search_word_in_files(self.folder_path.get(), self.search_word.get())
+        # Set all_matches option for search query
+        if self.all_matches.state() == ('selected', ):
+            all_matches = True
+        else:
+            all_matches = False
+
+        # Search call
+        results = fst.search_word_in_files(
+            self.folder_path.get(),
+            self.search_word.get(),
+            show_all_matches=all_matches
+            )
+
+        # Print results in gui
         self.clear_results()
         self.search_result.insert(1.0, str(results[1]) + '\n')
         self.search_result.insert(2.0, str(results[2]) + '\n')
