@@ -15,14 +15,10 @@ class Application(tk.Tk):
         self.title('File Search Tool')
 
         self.columnconfigure(0, weight=1)
-        self.columnconfigure(1, weight=1)
         self.rowconfigure(0, weight=1)
 
         frame = SearchForm(self)
         frame.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)
-
-        # frame2 = SearchFrom(self)
-        # frame2.grid(row=0, column=1, sticky="nsew", padx=5, pady=5)
 
 
 class SearchForm(ttk.Frame):
@@ -30,23 +26,24 @@ class SearchForm(ttk.Frame):
         super().__init__(parent)
 
         self.columnconfigure(0, weight=1)
-        self.columnconfigure(1, weight=3)
+        self.columnconfigure(1, weight=100)
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
         self.rowconfigure(2, weight=1)
         self.rowconfigure(3, weight=1)
-        self.rowconfigure(4, weight=20)
+        self.rowconfigure(4, weight=100)
 
         self.folder_path_label = ttk.Label(self, text='Folder path')
-        self.folder_path_label.grid(row=0, column=0, sticky='wn')
+        self.folder_path_label.grid(row=0, column=0, sticky='nw')
+        # self.folder_path_label.grid(row=0, column=0)
 
-        self.folder_path = ttk.Entry(self)
+        self.folder_path = ttk.Entry(self, width=50)
         self.folder_path.grid(row=0, column=1, columnspan=2, sticky='wne')
 
         self.search_word_label = ttk.Label(self, text='Search word')
-        self.search_word_label.grid(row=1, column=0, sticky='wn')
+        self.search_word_label.grid(row=1, column=0, sticky='nw')
 
-        self.search_word = ttk.Entry(self)
+        self.search_word = ttk.Entry(self, width=50)
         self.search_word.grid(row=1, column=1, columnspan=2, sticky='wne')
 
         self.all_matches = ttk.Checkbutton(self, text='Show all matches', variable=False)
@@ -57,7 +54,7 @@ class SearchForm(ttk.Frame):
 
         self.search_result = ScrolledText(self)
         self.search_result.grid(row=4, column=0, columnspan=3, sticky="nsew")
-        self.search_result.insert(1.0, 'test\ntest\ntest')
+        # self.search_result.insert(1.0, 'test\ntest\ntest')
 
     def add_to_text(self, _event=None):
         text = self.search_word.get()
